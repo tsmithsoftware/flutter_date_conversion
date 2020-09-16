@@ -1,0 +1,98 @@
+{
+  "visitor": {
+    "nestedDateLevelTwo": "2020-06-10 10:00:00",
+    "id": 1,
+    "name": "john doe",
+    "company": "BP",
+    "imageLink": {
+      "imageId": 1,
+      "nestedDateLevelThree": "2020-05-10 10:00:00",
+      "modifications": {
+        "nestedDateLevelFour": "2020-05-10 12:00:00",
+        "additionalNesting": {
+          "nestedDateLevelFive": "2020-06-10 10:00:00"
+        },
+        "signInStaff": {
+          "staffId": "1",
+          "cognitoId": null,
+          "username": "Staff B",
+          "fullName": "Benjamin Staff"
+        },
+        "signOutStaff": {
+          "staffId": "1",
+          "cognitoId": null,
+          "username": "Staff B",
+          "fullName": "Benjamin Staff"
+        }
+      }
+    },
+    "signInStaff": {
+      "staffId": "1",
+      "cognitoId": {
+        "signInStaff": {
+          "staffId": "1",
+          "cognitoId": null,
+          "username": "Staff B",
+          "fullName": {
+            "nestedDateLevelFive": "2020-06-10 10:00:00",
+            "signInStaff": {
+              "staffId": "1",
+              "cognitoId": null,
+              "username": "Staff B",
+              "fullName": "Benjamin Staff"
+            },
+            "imageLink": {
+              "nestedDateLevelSix": "2020-06-10 10:00:00"
+            }
+          }
+        },
+        "signOutStaff": {
+          "staffId": "1",
+          "cognitoId": null,
+          "username": "Staff B",
+          "fullName": "Benjamin Staff",
+          "nestedLevelFive": {
+            "nestedLevelSix": {
+              "something": "2020-06-10 10:00:00"
+            },
+            "nestedLevelSeven": {
+              "nestedDateLevelSeven": "2020-06-10 10:00:00",
+              "signInStaff": {
+                "staffId": "1",
+                "cognitoId": null,
+                "username": "Staff B",
+                "fullName": "Benjamin Staff"
+              }
+            }
+          }
+        }
+      },
+      "username": "Staff B",
+      "fullName": "Benjamin Staff",
+      "nextLevel": {
+        "oneUp": {
+          "level6": {
+            "signInStaff": {
+              "staffId": "1",
+              "cognitoId": null,
+              "username": "Staff B",
+              "fullName": "Benjamin Staff"
+            },
+            "level6b": {
+              "level7": {
+                "level8": "2020-06-10 10:00:00"
+              }
+            }
+          }
+        }
+      }
+    },
+    "signOutStaff": {
+      "staffId": "1",
+      "cognitoId": null,
+      "username": "Staff B",
+      "fullName": "Benjamin Staff"
+    }
+  },
+  "nestedDateLevelOne": "2020-06-10 10:00:00"
+}
