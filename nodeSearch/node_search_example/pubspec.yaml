@@ -25,6 +25,8 @@ dependencies:
     sdk: flutter
   # overriding hashcode for custom object equality checks
   quiver: ^2.0.5
+  # DateFormats
+  intl: ^0.16.1
   cupertino_icons: ^0.1.3
 
 dev_dependencies:

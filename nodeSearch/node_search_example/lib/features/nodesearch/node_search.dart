@@ -1,21 +1,102 @@
-import 'dart:collection';
 import 'dart:convert';
 
+import 'package:node_search_example/features/nodesearch/date_time_converter.dart';
 import 'package:quiver/core.dart';
 
+// Representing how we want the DT stamps to look. One map of nodes would have a reference to one config object
+// all the nodes would use the same config object to e.g. choose which DT stamp to return (local or UTC)
+class NodeConfigurationObject {
+  TranslationDirection directionOfTranslation = TranslationDirection.NotSpecified;
+}
+
+// Representing which way DT stamp conversion works
+enum TranslationDirection { NotSpecified, UtcToLocal, LocalToUtc }
+enum JsonType { Map, List, Value }
 // each line of the json is a node
 class Node {
   dynamic key;
   dynamic value;
   Node parent;
+  JsonType type;
+  NodeConfigurationObject configurationObject;
 
-  Queue<Node> generateRoute() {
-    var route = Queue<Node>();
-    if (parent != null) {
-      route.addAll(parent.generateRoute());
+  dynamic toJson() {
+    if (type == JsonType.List) {
+      final List<dynamic> data = new List();
+      data[0] = value;
+      return data;
     }
-    route.add(this);
-    return route;
+    else if (type == JsonType.Map) {
+      return
+          {
+            key: value
+          };
+      }
+    else if (type == JsonType.Value) {
+      // check if DT and convert
+      return "'$key':'$value'";
+    }
+  }
+
+  bool isDateTime(value) {
+    try {
+      DateTime.parse(value);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  String toString() {
+    if (type == JsonType.List) {
+      dynamic valueOfNode = value.values;
+      String encodedNode = valueOfNode.toString();
+      // toString encodes the values in brackets. We need to remove them.
+      String cleanedEncodedNode = encodedNode.substring(1, encodedNode.length - 1);
+      // and replace the round brackets with []
+      if (key is String) {
+        var encodedNodeAsList =  [
+          cleanedEncodedNode
+        ];
+        return "\"$key\": $encodedNodeAsList".trim();
+      }
+      var encodedNodeAsList =   [
+        cleanedEncodedNode
+      ];
+      return encodedNodeAsList.toString().trim();
+    } else if (type == JsonType.Value) {
+      // Only string values need to be quoted
+      if (value is String) {
+        String valueCopy = value; //to prevent multiple conversions of the same string
+        // check if DT and convert
+        if (isDateTime(valueCopy)) {
+          valueCopy = DateTimeConverter.convertToCleanString(value, configurationObject.directionOfTranslation);
+        }
+        return "\"$key\":\"$valueCopy\"";
+      } else {
+        return "\"$key\":$value";
+      }
+    } else if (type == JsonType.Map){
+      // value is an InternalLinkedHashMap, so calling a straight { key: value }.toString() will also encode the keys in the json
+      // so first we need to strip the keys out
+      dynamic initialObjectRepresentation = value.values.map((e) => e.toString()).toString();
+      String initialStringRepresentation = initialObjectRepresentation.toString();
+      // toString encodes the values in brackets. We need to remove them.
+      String cleanedString = initialStringRepresentation.substring(1, initialStringRepresentation.length);
+      cleanedString = cleanedString.substring(0, cleanedString.length -1 );
+      // and replace the round brackets with {}
+      String check = "{$cleanedString}";
+      // if key is an integer, this map is a value in an array.
+      // we should only return json in key:value format if the key is a string
+      if (key is String) {
+        var a =   "\"$key\": $check";
+        return a;
+      } else {
+        return check;
+      }
+    }
+    return "";
   }
 
   @override
@@ -35,19 +116,26 @@ class Node {
   @override
   int get hashCode => hashObjects([key, value]);
 
+  /// Used to set how the node returns itself as JSON. Allows the configurationObject to be changed outside of the map.
+  void setConfigurationObject(NodeConfigurationObject configurationObject) {
+    this.configurationObject = configurationObject;
+    if (this.value is Map) {
+      Map valueAsMap = this.value;
+      for(dynamic child in valueAsMap.values) {
+        if (child is Node) {
+          child.setConfigurationObject(configurationObject);
+        }
+      }
+    }
+  }
+
 }
 
-// to mark root of graph
+/// to mark root of graph
 class RootNode extends Node {}
 
-// to represent where in the graph to update a DT stamp
-class NodeUpdateLocation {
-  Node nodeToUpdate;
-  Queue<Node> route = Queue();
-}
-
 class NodeSearch {
-  // Build a map of nodes given a JSON string
+  /// Build a map of nodes given a JSON string
   Node buildMap(String jsonData) {
     dynamic jsonValue = json.decode(jsonData);
     Map<dynamic, Node> newChildren = Map<dynamic, Node>();
@@ -55,6 +143,7 @@ class NodeSearch {
     RootNode rootNode = RootNode();
     rootNode.key = 0;
     if (jsonValue is List) {
+      rootNode.type = JsonType.List;
       for (int position = 0; position < jsonValue.length; position++) {
         newChildren[position] =
             _createChildNodes(jsonValue[position], position, rootNode);
@@ -62,6 +151,7 @@ class NodeSearch {
     }
 
     if (jsonValue is Map) {
+      rootNode.type = JsonType.Map;
       Map valueMap = jsonValue;
       for (dynamic key in valueMap.keys) {
         newChildren[key] = _createChildNodes(jsonValue[key], key, rootNode);
@@ -72,21 +162,25 @@ class NodeSearch {
     return rootNode;
   }
 
-  // find all places in the JSON which need updating
-  List<NodeUpdateLocation> getUpdateLocations(String jsonData) {
-    Node map = buildMap(jsonData);
-    List<NodeUpdateLocation> locations = List();
-    locations = searchMapForLocations(map, locations);
-    return locations;
+  /// Set configuration object - used when converting to String. We use a reference to a single object so that all the nodes in the map can be updated easily, by changes to this one object
+  void setConfigurationObject(Node rootNode, NodeConfigurationObject configurationObject) {
+    rootNode.setConfigurationObject(configurationObject);
   }
 
+  String returnDtConvertedString(Node rootNode) {
+    return rootNode.toString().trim();
+  }
+
+
   // Helper methods
+  // Helper method for buildMap
   Node _createChildNodes(dynamic listJsonValue, dynamic position, Node parent) {
     Node childNode = Node();
     childNode.key = position;
     Map<dynamic, Node> subChildren = Map<dynamic, Node>();
     // Map
     if (listJsonValue is Map) {
+      childNode.type = JsonType.Map;
       for (dynamic key in listJsonValue.keys) {
         subChildren[key] =
             _createChildNodes(listJsonValue[key], key, childNode);
@@ -95,6 +189,7 @@ class NodeSearch {
     }
     // List
     else if (listJsonValue is List) {
+      childNode.type = JsonType.List;
       for (int position = 0; position < listJsonValue.length; position++) {
         subChildren[position] =
             _createChildNodes(listJsonValue[position], position, childNode);
@@ -103,47 +198,10 @@ class NodeSearch {
     }
     // Value
     else {
+      childNode.type = JsonType.Value;
       childNode.value = listJsonValue;
     }
     childNode.parent = parent;
     return childNode;
-  }
-
-  List<NodeUpdateLocation> searchMapForLocations(
-      Node map, List<NodeUpdateLocation> locations) {
-    if (map.value is String) {
-      if (isDateTime(map.value)) {
-        NodeUpdateLocation location = createLocation(map);
-        locations.add(location);
-      }
-    } else {
-      if (!(map.value is int)) {
-        Map<dynamic, Node> value = map.value;
-        if (value != null) {
-          for (dynamic mapEntry in value.values) {
-            if (mapEntry is Node) {
-              searchMapForLocations(mapEntry, locations);
-            }
-          }
-        }
-      }
-    }
-    return locations;
-  }
-
-  bool isDateTime(value) {
-    try {
-      DateTime.parse(value);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  NodeUpdateLocation createLocation(Node value) {
-    var newLocation = NodeUpdateLocation();
-    newLocation.nodeToUpdate = value;
-    newLocation.route = value.generateRoute();
-    return newLocation;
   }
 }
