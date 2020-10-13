@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:node_search_example/features/nodesearch/date_time_converter.dart';
 import 'package:quiver/core.dart';
 
 // Representing how we want the DT stamps to look. One map of nodes would have a reference to one config object
@@ -49,54 +48,12 @@ class Node {
 
   @override
   String toString() {
-    if (type == JsonType.List) {
-      dynamic valueOfNode = value.values;
-      String encodedNode = valueOfNode.toString();
-      // toString encodes the values in brackets. We need to remove them.
-      String cleanedEncodedNode = encodedNode.substring(1, encodedNode.length - 1);
-      // and replace the round brackets with []
-      if (key is String) {
-        var encodedNodeAsList =  [
-          cleanedEncodedNode
-        ];
-        return "\"$key\": $encodedNodeAsList".trim();
-      }
-      var encodedNodeAsList =   [
-        cleanedEncodedNode
-      ];
-      return encodedNodeAsList.toString().trim();
-    } else if (type == JsonType.Value) {
-      // Only string values need to be quoted
-      if (value is String) {
-        String valueCopy = value; //to prevent multiple conversions of the same string
-        // check if DT and convert
-        if (isDateTime(valueCopy)) {
-          valueCopy = DateTimeConverter.convertToCleanString(value, configurationObject.directionOfTranslation);
-        }
-        return "\"$key\":\"$valueCopy\"";
-      } else {
-        return "\"$key\":$value";
-      }
-    } else if (type == JsonType.Map){
-      // value is an InternalLinkedHashMap, so calling a straight { key: value }.toString() will also encode the keys in the json
-      // so first we need to strip the keys out
-      dynamic initialObjectRepresentation = value.values.map((e) => e.toString()).toString();
-      String initialStringRepresentation = initialObjectRepresentation.toString();
-      // toString encodes the values in brackets. We need to remove them.
-      String cleanedString = initialStringRepresentation.substring(1, initialStringRepresentation.length);
-      cleanedString = cleanedString.substring(0, cleanedString.length -1 );
-      // and replace the round brackets with {}
-      String check = "{$cleanedString}";
-      // if key is an integer, this map is a value in an array.
-      // we should only return json in key:value format if the key is a string
-      if (key is String) {
-        var a =   "\"$key\": $check";
-        return a;
-      } else {
-        return check;
-      }
-    }
-    return "";
+  }
+
+  StringBuffer _convertRootNodeToString(StringBuffer buffer) {
+  }
+
+  StringBuffer _convertChildNodeToString(StringBuffer buffer) {
   }
 
   @override
@@ -134,29 +91,47 @@ class Node {
 /// to mark root of graph
 class RootNode extends Node {}
 
+
+
+abstract class NodeRoot {
+  NodeConfigurationObject config;
+  String toString();
+}
+
+class CollectionNode extends NodeRoot {}
+
+class ListNode extends CollectionNode {
+  List<Node> nodes;
+}
+class MapNode extends CollectionNode {
+  Map<dynamic, Node> nodes;
+}
+class ValueNode extends NodeRoot {
+  Map<dynamic, dynamic> values;
+}
+
+
+
+
 class NodeSearch {
   /// Build a map of nodes given a JSON string
+  /// all we need is a list of the nodes, the nodes themselves handle  stringifying themselves
   Node buildMap(String jsonData) {
     dynamic jsonValue = json.decode(jsonData);
-    Map<dynamic, Node> newChildren = Map<dynamic, Node>();
+    List<Node> newChildren  = List();
 
     RootNode rootNode = RootNode();
-    rootNode.key = 0;
     if (jsonValue is List) {
       rootNode.type = JsonType.List;
-      for (int position = 0; position < jsonValue.length; position++) {
-        newChildren[position] =
-            _createChildNodes(jsonValue[position], position, rootNode);
-      }
     }
-
     if (jsonValue is Map) {
       rootNode.type = JsonType.Map;
-      Map valueMap = jsonValue;
-      for (dynamic key in valueMap.keys) {
-        newChildren[key] = _createChildNodes(jsonValue[key], key, rootNode);
-      }
     }
+
+    Node value = _createChildNodes(jsonValue, 0, rootNode);
+    newChildren.add(
+        value
+    );
 
     rootNode.value = newChildren;
     return rootNode;
@@ -177,13 +152,12 @@ class NodeSearch {
   Node _createChildNodes(dynamic listJsonValue, dynamic position, Node parent) {
     Node childNode = Node();
     childNode.key = position;
-    Map<dynamic, Node> subChildren = Map<dynamic, Node>();
+   List<Node> subChildren = List<Node>();
     // Map
     if (listJsonValue is Map) {
       childNode.type = JsonType.Map;
       for (dynamic key in listJsonValue.keys) {
-        subChildren[key] =
-            _createChildNodes(listJsonValue[key], key, childNode);
+        subChildren.add(_createChildNodes(listJsonValue[key], key, childNode));
       }
       childNode.value = subChildren;
     }

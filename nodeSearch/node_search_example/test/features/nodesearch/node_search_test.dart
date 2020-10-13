@@ -64,7 +64,8 @@ void main() async {
         NodeConfigurationObject configurationObject = NodeConfigurationObject();
         configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
         sut.setConfigurationObject(node, configurationObject);
-        dynamic jsonObject = json.decode(node.toString());
+        String toString = node.toString();
+        dynamic jsonObject = json.decode(toString);
         assert(jsonObject["signInDateTime"] == "2020-08-28 09:26:31.000");
       });
       test('updates the correct node in a map in a JSON array with a single element with one node to update and returns correct JSON', (){
@@ -73,7 +74,8 @@ void main() async {
         NodeConfigurationObject configurationObject = NodeConfigurationObject();
         configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
         sut.setConfigurationObject(node, configurationObject);
-        dynamic jsonObject = json.decode(node.toString());
+        String jsonEncodedString = node.toString();
+        dynamic jsonObject = json.decode(jsonEncodedString);
         assert(jsonObject["visits"][0]["signInDateTime"] == "2020-08-28 09:26:31.000");
       });
 
@@ -83,13 +85,15 @@ void main() async {
         NodeConfigurationObject configurationObject = NodeConfigurationObject();
         configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
         sut.setConfigurationObject(node, configurationObject);
-        dynamic jsonObject = json.decode(node.toString());
+        String jsonEncodedString = node.toString();
+        dynamic jsonObject = json.decode(jsonEncodedString);
         assert(jsonObject[0]["signInDateTime"] == "2020-08-28 09:26:31.000");
       });
-  /**
-      test('updates the correct node of multiple DT stamps in a complex JSON map and returns correct JSON', (){
+
+      test('updates the correct node of multiple DT stamps in a medium-complex JSON map and returns correct JSON', (){
         var sut = NodeSearch();
-        RootNode node = sut.buildMap(fixture("nested_mixed_dates.json"));
+        String jsonString = fixture("medium_complex.json");
+        RootNode node = sut.buildMap(jsonString);
         NodeConfigurationObject configurationObject = NodeConfigurationObject();
         configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
         sut.setConfigurationObject(node, configurationObject);
@@ -97,44 +101,26 @@ void main() async {
 
         print(nodeString);
         dynamic jsonObject = json.decode(node.toString());
-        assert(jsonObject[0]["nestedDateLevelOne"] == "2020-08-28 09:26:31.000");
+        assert(jsonObject["visitor"]["nestedDateLevelTwo"] == "2020-06-10 09:00:00.000");
       });
 
       test('updates the correct node of multiple DT stamps in a complex JSON map and returns correct JSON', (){
         var sut = NodeSearch();
-        List<NodeUpdateLocation> locations = sut.getUpdateLocations(fixture("nested_mixed_dates.json"));
-        Map result = sut.updateJsonAtLocations(jsonString: fixture("nested_mixed_dates.json"), locations: locations, direction: TranslationDirection.LocalToUtc);
-        var levelOne = result["nestedDateLevelOne"];
-        var levelTwo = result["visitor"];
-        fail("Not Implemented!");
-      });**/
+        String jsonString = fixture("nested_mixed_dates.json");
+        RootNode node = sut.buildMap(jsonString);
+        NodeConfigurationObject configurationObject = NodeConfigurationObject();
+        configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
+        sut.setConfigurationObject(node, configurationObject);
+        String nodeString = node.toString();
+
+        print(nodeString);
+        dynamic jsonObject = json.decode(node.toString());
+        assert(jsonObject["nestedDateLevelOne"] == "2020-06-10 09:00:00.000");
+      });
     });
 
-    /**
     group('UTC to local', (){
-      test('updates the correct node in a single-level JSON map with one node to update and returns correct JSON', (){
-        var sut = NodeSearch();
-        List<NodeUpdateLocation> locations = sut.getUpdateLocations(fixture("basic_json.json"));
-        Map updatedJson = sut.updateJsonAtLocations(jsonString: fixture("basic_json.json"), locations: locations, direction: TranslationDirection.UtcToLocal);
-        assert(updatedJson["signInDateTime"] == "2020-08-28 11:26:31.000");
-      });
-      test('updates the correct node in a map in a JSON array with a single element with one node to update and returns correct JSON', (){
-        var sut = NodeSearch();
-        List<NodeUpdateLocation> locations = sut.getUpdateLocations(fixture("map_with_one_array.json"));
-        Map updatedJson = sut.updateJsonAtLocations(jsonString: fixture("map_with_one_array.json"), locations: locations, direction: TranslationDirection.UtcToLocal);
-        assert(updatedJson["signInDateTime"] == "2020-08-28 11:26:31.000");
-      });
-      test('updates the correct node in an array in a JSON map with a single element with one node to update and returns correct JSON', (){
-        var sut = NodeSearch();
-        List<NodeUpdateLocation> locations = sut.getUpdateLocations(fixture("list_with_one_map.json"));
-        Map updatedJson = sut.updateJsonAtLocations(jsonString: fixture("list_with_one_map.json"), locations: locations, direction: TranslationDirection.UtcToLocal);
-        assert(updatedJson["signInDateTime"] == "2020-08-28 11:26:31.000");
-      });
-      test('updates the correct node of multiple DT stamps in a complex JSON map and returns correct JSON', (){
-        throw UnimplementedError();
-      });
     });
-**/
 
     group('toJson', (){
       test('toJson', (){
