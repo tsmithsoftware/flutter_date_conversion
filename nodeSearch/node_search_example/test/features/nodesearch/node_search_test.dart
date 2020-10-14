@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:node_search_example/features/nodesearch/date_time_converter.dart';
 import 'package:node_search_example/features/nodesearch/node_search.dart';
 
 import '../../fixtures/fixture_reader.dart';
@@ -9,223 +10,176 @@ void main() async {
   group('graph creation', (){
     test('search adds a root node to search map', (){
       var sut = NodeSearch();
-      Node map = sut.buildMap(fixture("list_json_body_with_dates.json"));
+      NodeRoot map = sut.buildMapFromString(fixture("list_json_body_with_dates.json"));
       assert(map != null);
     });
     test('search  adds a root Container node to search map', (){
       var sut = NodeSearch();
-      Node map = sut.buildMap(fixture("list_json_body_with_dates.json"));
-      assert(map is Node);
+      NodeRoot map = sut.buildMapFromString(fixture("list_json_body_with_dates.json"));
+      assert(map is NodeRoot);
     });
     test('search adds a root Container node and one Value node to search map when provided with an array with one element', (){
       var sut = NodeSearch();
-      Node map = sut.buildMap(fixture("list_json_body_with_dates.json"));
-      Map<dynamic, Node> children = map.value;
-      assert(children.length == 1);
-      Node child = children[0];
-      Map values = child.value;
-      Node visitId = values["visitId"];
-      Node notificationId = values["notificationId"];
-      Node signInDateTime = values["signInDateTime"];
-      assert(visitId.value == 316);
-      assert(notificationId.value == 599135627);
-      assert(signInDateTime.value == "2020-08-28 10:26:31.000");
+      NodeRoot map = sut.buildMapFromString(fixture("list_json_body_with_dates.json"));
+      dynamic nodes = map.getNodes();
+      assert(nodes != null);
+      assert(map is ListNode);
+      List child = map.getNodes();
+      assert(child.length == 1);
+      assert(child[0] is MapNode);
+      Map<String, NodeRoot> children = child[0].nodes;
+      assert(children.length == 3);
+      ValueNode visitId = children["visitId"];
+      ValueNode notificationId = children["notificationId"];
+      ValueNode signInDateTime = children["signInDateTime"];
+      assert(visitId.getNodes() == 316);
+      assert(notificationId.getNodes() == 599135627);
+      assert(signInDateTime.getNodes() == "2020-08-28 10:26:31.000");
     });
     test('search adds a root Container node, with one Container node containing one Value node to search map when provided with a map with one array', (){
       var sut = NodeSearch();
-      Node map = sut.buildMap(fixture("map_with_one_array.json"));
-      Map<dynamic, Node> rootChildren = map.value; // root node {}
-      assert(rootChildren.length == 1);
-      var visitsElement = rootChildren["visits"]; // visits nodes { visits: [] }
-      Node containerChild = visitsElement;
-      assert(containerChild.key == "visits");
-      assert(containerChild.value.length == 1); // one visit element
-      Node firstVisitDetailsElement = containerChild.value[0]; // first visit element
-      Node visitDetailsId = firstVisitDetailsElement.value["visitId"];
-      Node visitDetailsDescription = firstVisitDetailsElement.value["visitDescription"];
+      NodeRoot map = sut.buildMapFromString(fixture("map_with_one_array.json"));
+      dynamic nodes = map.getNodes();
+      assert(nodes != null);
+      assert(map is MapNode);
+      Map children = map.getNodes();
+      assert(children.length == 1);
+      ListNode arrayChild = children["visits"];
+      MapNode firstChild = arrayChild.getNodes()[0];
+      assert(firstChild != null);
+      Map mapChildren = firstChild.getNodes();
+      ValueNode visitId = mapChildren["visitId"];
+      ValueNode visitDescription = mapChildren["visitDescription"];
+      ValueNode signInDateTime = mapChildren["signInDateTime"];
 
-      assert(visitDetailsId.value == 1);
-      assert(visitDetailsDescription.value == "Nice!");
+      assert(visitId.getNodes() == 1);
+      assert(visitDescription.getNodes() == "Nice!");
+      assert(signInDateTime.getNodes() == "2020-08-28 10:26:31.000");
     });
     test('search adds a root Container nodes with other nested Container and Value nodes as described in json', (){
       var sut = NodeSearch();
-      Node map = sut.buildMap(fixture("multiple_nested_dates.json"));
-      Map<dynamic, Node> rootChildren = map.value;
-      assert(rootChildren.length == 1);
+      NodeRoot map = sut.buildMapFromString(fixture("multiple_nested_dates.json"));
+      Map nodes = map.getNodes();
+      assert(nodes != null);
     });
   });
 
-  group('updating nodes', (){
+  group('toJson', (){
 
-    group('local to UTC', () {
-      test('updates the correct node in a single-level JSON map with one node to update and returns correct JSON', (){
-        var sut = NodeSearch();
-        RootNode node = sut.buildMap(fixture("basic_json.json"));
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
-        sut.setConfigurationObject(node, configurationObject);
-        String toString = node.toString();
-        dynamic jsonObject = json.decode(toString);
-        assert(jsonObject["signInDateTime"] == "2020-08-28 09:26:31.000");
-      });
-      test('updates the correct node in a map in a JSON array with a single element with one node to update and returns correct JSON', (){
-        var sut = NodeSearch();
-        RootNode node = sut.buildMap(fixture("map_with_one_array.json"));
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
-        sut.setConfigurationObject(node, configurationObject);
-        String jsonEncodedString = node.toString();
-        dynamic jsonObject = json.decode(jsonEncodedString);
-        assert(jsonObject["visits"][0]["signInDateTime"] == "2020-08-28 09:26:31.000");
-      });
-
-      test('updates the correct node in an array in a JSON map with a single element with one node to update and returns correct JSON', (){
-        var sut = NodeSearch();
-        RootNode node = sut.buildMap(fixture("list_with_one_map.json"));
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
-        sut.setConfigurationObject(node, configurationObject);
-        String jsonEncodedString = node.toString();
-        dynamic jsonObject = json.decode(jsonEncodedString);
-        assert(jsonObject[0]["signInDateTime"] == "2020-08-28 09:26:31.000");
-      });
-
-      test('updates the correct node of multiple DT stamps in a medium-complex JSON map and returns correct JSON', (){
-        var sut = NodeSearch();
-        String jsonString = fixture("medium_complex.json");
-        RootNode node = sut.buildMap(jsonString);
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
-        sut.setConfigurationObject(node, configurationObject);
-        String nodeString = node.toString();
-
-        print(nodeString);
-        dynamic jsonObject = json.decode(node.toString());
-        assert(jsonObject["visitor"]["nestedDateLevelTwo"] == "2020-06-10 09:00:00.000");
-      });
-
-      test('updates the correct node of multiple DT stamps in a complex JSON map and returns correct JSON', (){
-        var sut = NodeSearch();
-        String jsonString = fixture("nested_mixed_dates.json");
-        RootNode node = sut.buildMap(jsonString);
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.LocalToUtc;
-        sut.setConfigurationObject(node, configurationObject);
-        String nodeString = node.toString();
-
-        print(nodeString);
-        dynamic jsonObject = json.decode(node.toString());
-        assert(jsonObject["nestedDateLevelOne"] == "2020-06-10 09:00:00.000");
-      });
+    test ('toJson successfully returns correct string for simple value node',(){
+      ValueNode vNode = ValueNode();
+      vNode.values = "value";
+      assert(vNode.toString() == "\"value\"");
     });
 
-    group('UTC to local', (){
+    test ('toJson successfully returns correct string for simple Map node',(){
+      MapNode mNode = MapNode();
+      ValueNode vNode = ValueNode();
+      vNode.values = "value";
+      mNode.nodes["mapKey"] = vNode;
+      dynamic translatedJson = json.decode(mNode.toString());
+      assert(translatedJson["mapKey"] == "value");
     });
 
-    group('toJson', (){
-      test('toJson', (){
-        var sut = NodeSearch();
-        RootNode node = sut.buildMap(fixture("basic_json.json"));
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.NotSpecified;
-        sut.setConfigurationObject(node, configurationObject);
-        String nodeString = node.toString();
-        var decodedObjectFromString = json.decode(nodeString);
-        assert(decodedObjectFromString["signInDateTime"] == "2020-08-28 10:26:31.000");
-      });
-      test('toJson mk 2', (){
-        var sut = NodeSearch();
-        String originalJson = fixture("list_json_body_with_dates.json");
-        RootNode map = sut.buildMap(originalJson);
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.NotSpecified;
-        sut.setConfigurationObject(map, configurationObject);
-        String nodeString = map.toString();
+    test ('toJson successfully returns correct string for simple json',(){
+      var sut = NodeSearch();
+      NodeRoot map = sut.buildMapFromString(fixture("basic_json.json"));
+      String jsonString = map.toString();
+      dynamic originalObject = json.decode(jsonString);
+      assert(originalObject["signInDateTime"] == "2020-08-28 10:26:31.000");
+    });
 
-        Map decodedObjectFromString = json.decode(nodeString)[0];
-        Map decodedOriginalObjectFromString = json.decode(originalJson)[0];
+    test ('toJson successfully returns correct string for simple List json',(){
+      var sut = NodeSearch();
+      NodeRoot map = sut.buildMapFromString(fixture("list_json_body_with_dates.json"));
+      String jsonString = map.toString();
+      dynamic originalObject = json.decode(jsonString);
+      assert(originalObject[0]["visitId"] == 316);
+      assert(originalObject[0]["notificationId"] == 599135627);
+      assert(originalObject[0]["signInDateTime"] == "2020-08-28 10:26:31.000");
+    });
 
-        assert(
-        (decodedObjectFromString["visitId"] == decodedOriginalObjectFromString["visitId"]) &&
-            (decodedObjectFromString["notificationId"] == decodedOriginalObjectFromString["notificationId"]) &&
-            (decodedObjectFromString["signInDateTime"] == decodedOriginalObjectFromString["signInDateTime"])
-        );
-      });
-      test('toJson mk 3', (){
-        var sut = NodeSearch();
-        String originalJson = fixture("list_json_body_with_multiple_dates.json");
-        RootNode map = sut.buildMap(originalJson);
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.NotSpecified;
-        sut.setConfigurationObject(map, configurationObject);
-        String nodeString = map.toString();
+    test ('toJson successfully returns correct string for List json',(){
+      var sut = NodeSearch();
+      NodeRoot map = sut.buildMapFromString(fixture("list_json_body_with_multiple_dates.json"));
+      String jsonString = map.toString();
+      dynamic originalObject = json.decode(jsonString);
 
-        dynamic originalObject = json.decode(originalJson);
-        Map firstOriginalVisit = originalObject[0];
-        Map secondOriginalVisit = originalObject[1];
+      assert(originalObject[0]["visitId"] == 316);
+      assert(originalObject[0]["notificationId"] == 599135627);
+      assert(originalObject[0]["signInDateTime"] == "2020-08-28 10:26:31.000");
 
-        dynamic updatedObject = json.decode(nodeString);
-        Map firstDecodedVisit = updatedObject[0];
-        Map secondDecodedVisit = updatedObject[1];
+      assert(originalObject[1]["visitId"] == 317);
+      assert(originalObject[1]["notificationId"] == 938432345);
+      assert(originalObject[1]["signInDateTime"] == "2020-08-28 11:26:31.000");
+    });
 
-        assert(
-        // check first visit details
-        (firstOriginalVisit["visitId"] == firstDecodedVisit["visitId"]) &&
-            (firstOriginalVisit["notificationId"] == firstDecodedVisit["notificationId"]) &&
-            (firstOriginalVisit["signInDateTime"] == firstDecodedVisit["signInDateTime"]) &&
-            // check second visit details
-            (secondOriginalVisit["visitId"] == secondDecodedVisit["visitId"]) &&
-            (secondOriginalVisit["notificationId"] == secondDecodedVisit["notificationId"]) &&
-            (secondOriginalVisit["signInDateTime"] == secondDecodedVisit["signInDateTime"])
-        );
-      });
-      test('complex json', (){
-        var sut = NodeSearch();
-        String originalJson = fixture("multiple_nested_dates.json");
-        RootNode map = sut.buildMap(originalJson);
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.NotSpecified;
-        sut.setConfigurationObject(map, configurationObject);
-        String nodeString = map.toString();
+    test ('toJson successfully returns correct string for a map with a single array',(){
+      var sut = NodeSearch();
+      NodeRoot map = sut.buildMapFromString(fixture("map_with_one_array.json"));
+      String jsonString = map.toString();
+      dynamic originalObject = json.decode(jsonString);
+      dynamic visitObject = originalObject["visits"][0];
+      assert(visitObject != null);
+      assert(visitObject["visitId"] == 1);
+      assert(visitObject["visitDescription"] == "Nice!");
+      assert(visitObject["signInDateTime"] == "2020-08-28 10:26:31.000");
+    });
 
-        dynamic originalObject = json.decode(originalJson);
-        String firstDate = originalObject["visitor"]["imageLink"]["dateTaken"];
-        DateTime dtFirstDate = DateTime.parse(firstDate);
+    test ('toJson successfully returns correct string for nested map',(){
+      var sut = NodeSearch();
+      NodeRoot map = sut.buildMapFromString(fixture("medium_complex.json"));
+      String jsonString = map.toString();
+      dynamic originalObject = json.decode(jsonString);
+      dynamic visitObject = originalObject["visits"][0];
+      assert(visitObject != null);
+      assert(visitObject["visitId"] == 1);
+      assert(visitObject["visitDescription"] == "Nice!");
+      assert(visitObject["signInDateTime"] == "2020-08-28 10:26:31.000");
+    });
 
-        String secondDate = originalObject["visitor"]["imageLink"]["modifications"]["dateOfModification"];
-        DateTime dtSecondDate = DateTime.parse(secondDate);
+    test('blah', (){
+      String jsonString = fixture("medium_complex.json");
+      List<String> stringArr = jsonString.split("\"");
+      List<String> newStringArr = new List();
+      for(String each in stringArr) {
+        each = each.trim();
+        if (DateTime.tryParse(each) != null) {
+          each = DateTimeConverter.convertToCleanString(each, TranslationDirection.LocalToUtc);
+        }
+        newStringArr.add(each);
+      }
+      StringBuffer convertedString = StringBuffer();//newStringArr.toString();
+      for (String string in stringArr) {
+        // only quote strings not integers or []/{}
+        String trimmedString = string.trim();
+        if (!(trimmedString.contains("[") || trimmedString.contains("]") || trimmedString.contains("{") || trimmedString.contains("}") || trimmedString.contains(":") || trimmedString.contains(","))) {
+          if (double.tryParse(string) != null) { // a number
+            convertedString.write(string.trim());
+          } else {
+            convertedString.write("\"$trimmedString\"");
+          }
+        } else {
+          // need to check if date (contains ':')
+          if (DateTime.tryParse(string) == null) { // if not a date string
+            convertedString.write(trimmedString);
+          } else { // need to add "
+            convertedString.write("\"${DateTimeConverter.convertToCleanString(trimmedString, TranslationDirection.LocalToUtc)}\"");
+          }
 
-        String thirdDate = originalObject["visitor"]["imageLink"]["modifications"]["additionalNesting"]["nestedDate"];
-        DateTime dtThirdDate = DateTime.parse(thirdDate);
-
-        dynamic updatedObject = json.decode(nodeString);
-        String firstDecodedDate = updatedObject["visitor"]["imageLink"]["dateTaken"];
-        DateTime dtFirstDateUpdated = DateTime.parse(firstDecodedDate);
-
-        String secondDecodedDate = updatedObject["visitor"]["imageLink"]["modifications"]["dateOfModification"];
-        DateTime dtSecondDateUpdated = DateTime.parse(secondDecodedDate);
-
-        String thirdDecodedDate = updatedObject["visitor"]["imageLink"]["modifications"]["additionalNesting"]["nestedDate"];
-        DateTime dtThirdDateUpdated = DateTime.parse(thirdDecodedDate);
-
-        // convert to DT to get around additional decimal places in timestamp
-        assert(
-        (dtFirstDate == dtFirstDateUpdated) &&
-            (dtSecondDate == dtSecondDateUpdated) &&
-            (dtThirdDate == dtThirdDateUpdated)
-        );
-      });
-      test('very complex json', (){
-        var sut = NodeSearch();
-        String originalJson = fixture("nested_mixed_dates.json");
-        RootNode map = sut.buildMap(originalJson);
-        NodeConfigurationObject configurationObject = NodeConfigurationObject();
-        configurationObject.directionOfTranslation = TranslationDirection.NotSpecified;
-        sut.setConfigurationObject(map, configurationObject);
-        String nodeString = map.toString();
-        assert(nodeString != null);
-      });
+        }
+        /**
+        if (double.tryParse(string) != null) { // a number
+          convertedString.write(string.trim());
+        } else {
+          convertedString.write("\"${string.trim()}\"");
+        } **/
+      }
+      String st = convertedString.toString();
+      dynamic originalObject = json.decode(convertedString.toString().trim());
+      assert(originalObject["visitor"]["nestedDateLevelTwo"] == "2020-06-10 09:00:00");
     });
 
   });
+
 }
