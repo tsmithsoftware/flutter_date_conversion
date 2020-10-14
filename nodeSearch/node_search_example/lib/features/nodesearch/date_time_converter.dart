@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-import 'node_search.dart';
+enum TranslationDirection { NotSpecified, UtcToLocal, LocalToUtc }
 
 class DateTimeConverter {
   static String convertToCleanString(String dtValue, TranslationDirection direction) {
