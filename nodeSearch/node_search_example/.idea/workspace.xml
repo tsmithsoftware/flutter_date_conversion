@@ -1,99 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ab711eb0-4442-4e8b-bb7b-d60ea4cce031" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/KotlinJavaRuntime.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/timsmithdev/node_search_example/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/AppFrameworkInfo.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Base.lproj/Main.storyboard" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Runner/Runner-Bridging-Header.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/features/nodesearch/node_search.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/basic_json.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/fixture_reader.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/list_json_body_with_dates.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/list_json_body_with_multiple_dates.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/list_with_one_map.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/map_with_one_array.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/multiple_nested_dates.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/fixtures/nested_mixed_dates.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/nodesearch/node_search.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/nodesearch/node_search.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" afterDir="false" />
+    </list>
+    <list id="ac4cb21c-d4a1-43c0-a104-8fd8f683bd90" name="Ignore" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_28" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_10_API_30" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Kotlin Class" />
         <option value="Dart File" />
       </list>
     </option>
@@ -109,7 +37,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -118,24 +46,9 @@
       <recent name="C:\Users\Admin\Documents\development\flutter\nodeSearch\node_search_example\test\fixtures" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="finds the correct location in a map in a JSON array with a single element with one node to update" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="finds the correct location in a map in a JSON array with a single element with one node to update" />
-      <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="finds the correct location in a single-level JSON map with one node to update" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="finds the correct location in a single-level JSON map with one node to update" />
-      <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="finds the correct location in an array in a JSON map with a single element with one node to update" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="finds the correct location in an array in a JSON map with a single element with one node to update" />
-      <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
-      <method v="2" />
-    </configuration>
-    <configuration name="finds the correct location of multiple DT stamps in a nested JSON map" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
-      <option name="testName" value="finds the correct location of multiple DT stamps in a nested JSON map" />
+  <component name="RunManager" selected="Flutter Test.blah">
+    <configuration name="blah" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="blah" />
       <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
       <method v="2" />
     </configuration>
@@ -143,6 +56,43 @@
       <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
       <method v="2" />
     </configuration>
+    <configuration name="tests in test" type="FlutterTestConfigType" factoryName="Flutter Test" nameIsGenerated="true">
+      <option name="testDir" value="C:\Users\Admin\Documents\non_git_dev\git_dev_one\nodeSearch\node_search_example\test" />
+      <method v="2" />
+    </configuration>
+    <configuration name="toJson successfully returns correct string for List json" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="toJson successfully returns correct string for List json" />
+      <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="toJson successfully returns correct string for a map with a single array" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="toJson successfully returns correct string for a map with a single array" />
+      <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="toJson successfully returns correct string for nested map" type="FlutterTestConfigType" factoryName="Flutter Test" temporary="true" nameIsGenerated="true">
+      <option name="testName" value="toJson successfully returns correct string for nested map" />
+      <option name="testFile" value="$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Flutter.main.dart" />
+      <item itemvalue="Flutter Test.tests in test" />
+      <item itemvalue="Flutter Test.toJson successfully returns correct string for List json" />
+      <item itemvalue="Flutter Test.toJson successfully returns correct string for a map with a single array" />
+      <item itemvalue="Flutter Test.toJson successfully returns correct string for nested map" />
+      <item itemvalue="Flutter Test.tests in node_search_test.dart" />
+      <item itemvalue="Flutter Test.blah" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter Test.blah" />
+        <item itemvalue="Flutter Test.toJson successfully returns correct string for nested map" />
+        <item itemvalue="Flutter Test.tests in node_search_test.dart" />
+        <item itemvalue="Flutter Test.toJson successfully returns correct string for a map with a single array" />
+        <item itemvalue="Flutter Test.toJson successfully returns correct string for List json" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -150,11 +100,34 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ab711eb0-4442-4e8b-bb7b-d60ea4cce031" name="Default Changelist" comment="" />
+      <changelist id="ac4cb21c-d4a1-43c0-a104-8fd8f683bd90" name="Ignore" comment="" />
       <created>1600193297594</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1600193297594</updated>
     </task>
+    <task id="LOCAL-00001" summary="Search changed to using ConfigObjects to represent how to code DT stamps&#10;Changed to use node.toString to return a string representation of the entire map, dependent on the ConfigObject">
+      <created>1601375302975</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1601375302975</updated>
+    </task>
+    <task id="LOCAL-00002" summary="remove unused imports">
+      <created>1601375320348</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601375320348</updated>
+    </task>
+    <task id="LOCAL-00003" summary="changing">
+      <created>1602596284478</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1602596284478</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -162,59 +135,145 @@
       <path value="$PROJECT_DIR$/../../.." />
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
+    <MESSAGE value="Search changed to using ConfigObjects to represent how to code DT stamps&#10;Changed to use node.toString to return a string representation of the entire map, dependent on the ConfigObject" />
+    <MESSAGE value="remove unused imports" />
+    <MESSAGE value="changing" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-868" y="-905" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600263240986">
+    <state x="-730" y="-902" key="#Plugins" timestamp="1600263952044">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
+    <state x="-730" y="-902" key="#Plugins/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600263952044" />
+    <state x="-492" y="-705" key="#com.intellij.debugger.actions.ViewTextAction" timestamp="1600433537663">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-492" y="-705" key="#com.intellij.debugger.actions.ViewTextAction/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600433537663" />
+    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601374487282">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
     <state x="-868" y="-905" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600263240986" />
+    <state x="191" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1601374487282" />
     <state x="-573" y="-757" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1600194005289">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
     <state x="-573" y="-757" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600194005289" />
-    <state width="550" height="466" key="DebuggerActiveHint" timestamp="1600262732745">
+    <state x="-730" y="-941" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601471500869">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state width="550" height="466" key="DebuggerActiveHint/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600262732745" />
-    <state x="-542" y="-806" key="FileChooserDialogImpl" timestamp="1600263294015">
+    <state x="-730" y="-941" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1601471500869" />
+    <state x="368" y="91" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1601375215099" />
+    <state x="-603" y="-827" key="#toJson" timestamp="1600330757784">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-603" y="-827" key="#toJson/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600330757783" />
+    <state x="-422" y="-807" key="#xdebugger.XInspectDialog" timestamp="1601481333865">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-422" y="-807" key="#xdebugger.XInspectDialog/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1601481333865" />
+    <state x="-567" y="-857" key="#xdebugger.evaluate" timestamp="1601481356339">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-567" y="-857" key="#xdebugger.evaluate/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1601481356339" />
+    <state x="-467" y="-795" key="AndroidProcessChooserDialog" timestamp="1602507305550">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-467" y="-795" key="AndroidProcessChooserDialog/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602507305550" />
+    <state x="-807" y="-966" key="CommitChangelistDialog2" timestamp="1602596283725">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-807" y="-966" key="CommitChangelistDialog2/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602596283725" />
+    <state width="956" height="466" key="DebuggerActiveHint" timestamp="1602664638339">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="956" height="466" key="DebuggerActiveHint/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602664638339" />
+    <state width="509" height="305" key="DebuggerActiveHint/0.0.1280.680@0.0.1280.680" timestamp="1601372809940" />
+    <state x="493" y="179" key="FileChooserDialogImpl" timestamp="1601374484259">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="-542" y="-806" key="FileChooserDialogImpl/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600263294015" />
-    <state width="1877" height="398" key="GridCell.Tab.0.bottom" timestamp="1600262923070">
+    <state x="493" y="179" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1601374484259" />
+    <state width="1877" height="219" key="GridCell.Tab.0.bottom" timestamp="1602667179409">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state width="1877" height="398" key="GridCell.Tab.0.bottom/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600262923070" />
-    <state width="1877" height="398" key="GridCell.Tab.0.center" timestamp="1600262923070">
+    <state width="1877" height="219" key="GridCell.Tab.0.bottom/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602667179409" />
+    <state width="1228" height="175" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1601375363093" />
+    <state width="1877" height="219" key="GridCell.Tab.0.center" timestamp="1602667179409">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state width="1877" height="398" key="GridCell.Tab.0.center/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600262923070" />
-    <state width="1877" height="398" key="GridCell.Tab.0.left" timestamp="1600262923070">
+    <state width="1877" height="219" key="GridCell.Tab.0.center/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602667179409" />
+    <state width="1228" height="175" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1601375363093" />
+    <state width="1877" height="219" key="GridCell.Tab.0.left" timestamp="1602667179409">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state width="1877" height="398" key="GridCell.Tab.0.left/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600262923070" />
-    <state width="1877" height="398" key="GridCell.Tab.0.right" timestamp="1600262923070">
+    <state width="1877" height="219" key="GridCell.Tab.0.left/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602667179409" />
+    <state width="1228" height="175" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1601375363092" />
+    <state width="1877" height="219" key="GridCell.Tab.0.right" timestamp="1602667179409">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state width="1877" height="398" key="GridCell.Tab.0.right/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600262923070" />
-    <state x="-821" y="-918" key="SettingsEditor" timestamp="1600263306635">
+    <state width="1877" height="219" key="GridCell.Tab.0.right/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602667179409" />
+    <state width="1228" height="175" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1601375363093" />
+    <state x="-821" y="-918" key="SettingsEditor" timestamp="1600449573126">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state x="-821" y="-918" key="SettingsEditor/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600263306635" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1600250884573">
+    <state x="-821" y="-918" key="SettingsEditor/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600449573126" />
+    <state x="-492" y="-691" key="VCS.EditChangelistDialog" timestamp="1602596263498">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600250884573" />
-    <state x="-626" y="-736" key="com.intellij.ide.util.TipDialog" timestamp="1600263448725">
+    <state x="-492" y="-691" key="VCS.EditChangelistDialog/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602596263498" />
+    <state width="968" height="274" key="XDebugger.FullValuePopup" timestamp="1602666935820">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state x="-626" y="-736" key="com.intellij.ide.util.TipDialog/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600263448725" />
-    <state x="-626" y="-828" width="607" height="536" key="find.popup" timestamp="1600261002901">
+    <state width="968" height="274" key="XDebugger.FullValuePopup/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602666935820" />
+    <state width="646" height="180" key="XDebugger.FullValuePopup/0.0.1280.680@0.0.1280.680" timestamp="1601374645377" />
+    <state x="-626" y="-736" key="com.intellij.ide.util.TipDialog" timestamp="1602661357812">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state x="-626" y="-828" width="607" height="536" key="find.popup/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600261002901" />
-    <state x="-659" y="-855" width="672" height="678" key="search.everywhere.popup" timestamp="1600263272591">
+    <state x="-626" y="-736" key="com.intellij.ide.util.TipDialog/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602661357812" />
+    <state x="437" y="225" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1600931799793" />
+    <state x="-626" y="-828" width="610" height="536" key="find.popup" timestamp="1602666728696">
       <screen x="-1282" y="-1080" width="1920" height="1040" />
     </state>
-    <state x="-659" y="-855" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600263272591" />
+    <state x="-626" y="-828" width="610" height="536" key="find.popup/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1602666728696" />
+    <state x="-666" y="-299" key="run.anything.popup" timestamp="1600874287540">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-666" y="-299" key="run.anything.popup/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600874287540" />
+    <state x="-659" y="-855" width="672" height="678" key="search.everywhere.popup" timestamp="1600439897288">
+      <screen x="-1282" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="-659" y="-855" width="672" height="678" key="search.everywhere.popup/0.0.1280.680/-1282.-1080.1920.1040@-1282.-1080.1920.1040" timestamp="1600439897288" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/../../../../development/flutter/sdk/flutter/bin/cache/pkg/sky_engine/lib/convert/json.dart</url>
+          <line>679</line>
+          <option name="timeStamp" value="206" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart</url>
+          <line>133</line>
+          <option name="timeStamp" value="574" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart</url>
+          <line>132</line>
+          <option name="timeStamp" value="587" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/test/features/nodesearch/node_search_test.dart</url>
+          <line>179</line>
+          <option name="timeStamp" value="630" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="FlutterTestConfigType">
+        <watch expression="nodes" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

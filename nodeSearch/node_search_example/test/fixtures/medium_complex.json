@@ -1,0 +1,24 @@
+{
+  "visitor": {
+    "nestedDateLevelTwo": "2020-06-10 10:00:00",
+    "id": 1,
+    "name": "john doe",
+    "someOtherLink": {
+      "someDate": "2020-05-10 10:00:00"
+    },
+    "someLink": {
+      "someDate": "2020-05-10 10:00:00"
+    },
+    "company": "BP",
+    "imageLink": {
+      "imageId": 1,
+      "nestedDateLevelThree": "2020-05-10 10:00:00",
+      "modifications": {
+        "nestedDateLevelFour": "2020-05-10 12:00:00",
+        "additionalNesting": {
+          "nestedDateLevelFive": "2020-06-10 10:00:00"
+        }
+      }
+    }
+  }
+}
